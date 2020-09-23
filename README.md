@@ -16,7 +16,9 @@ The entire process can be run using the ***main.m*** file which also sets up and
 We assume a-prior knowledge about the nonlinear dynamics of Dubins' car which are given below:
 
 ![state](https://latex.codecogs.com/png.latex?\inline&space;\vec{x}&space;=&space;[x,&space;y,&space;\theta])
+
 ![input](https://latex.codecogs.com/png.latex?\inline&space;u&space;=&space;[v,&space;\omega])
+
 ![dynamics](https://latex.codecogs.com/png.latex?\inline&space;\dot{x}&space;=&space;\begin{bmatrix}&space;v&space;cos(\theta)\\&space;v&space;sin(\theta)\\&space;\omega&space;\end{bmatrix})
 
 With this model, we simulate the dynamics of the car along a trajectory given randomized inputs. This simulation is run using ***simulate.m*** in the repo.

@@ -35,7 +35,7 @@ function [tResult, xResult, u] = simulate(obj)
     tResult = cat(1, tResult, 0);       % Initial datapoint
     xResult = cat(1, xResult, x0);      % Initial datapoint
     for index = 2:numel(time)
-        af   = @(t,x) f(x, [u(index,1),u(index,2)]);    % Call ode45 for newe inputs
+        af   = @(t,x) f(x, [u(index,1),u(index,2)]);    % Call ode45 for new inputs
         tStep = time(index-1:index);                    % Get time for new ode45 calculation
         [t, x] = ode45(af, tStep, x0);                  % Solve ODE at timestep
         
@@ -52,5 +52,4 @@ function dx = f(x, u)
     dx = [u(1)*cos(x(3));
           u(1)*sin(x(3));
           u(2)];
-    
 end

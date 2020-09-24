@@ -1,8 +1,8 @@
-function plotting(type, x, x_est, u, obj)
+function plotting(type, x, x_est, u, obj, t)
     if contains(type, 'sim_results')
        plot_sim_results(x, u, obj); 
     elseif contains(type, 'validate_results')
-        plot_validation_results(x_est, x)        
+        plot_validation_results(x_est, x, t)        
     end
 
 end
@@ -31,7 +31,7 @@ function plot_sim_results(x, u, obj)
 
 end
 
-function plot_validation_results(x_est, x)    
+function plot_validation_results(x_est, x, t)    
     figure('Name', 'Identified System vs Actual System')
     subplot(2,2,[1,2]);
     plot(x(:,1),x(:,2));
@@ -40,16 +40,17 @@ function plot_validation_results(x_est, x)
     title('Dubins Car Path')
     xlabel('x [m]')
     ylabel('y [m]')
+    legend('Actual Model', 'Koopman Identified Model')
 
     subplot(2,2,3);
-    plot(x(:,1),x(:,2));
-    title('Actual System Results')
-    xlabel('x [m]')
-    ylabel('y [m]')
+    plot(t, abs((x_est(:,1)-x(:,1))./x(:,1)*100));
+    title('Percentage Error In Time Over X')
+    xlabel('Time [s]')
+    ylabel('Error [%]')
 
     subplot(2,2,4);
-    plot(x_est(:,1),x_est(:,2));
-    title('Koopman Identified Results')
-    xlabel('x [m]')
-    ylabel('y [m]')
+    plot(t,abs((x_est(:,2)-x(:,2))./x(:,2)*100));
+    title('Percentage Error In Time Over Y')
+    xlabel('Time [s]')
+    ylabel('Error [%]')
 end
